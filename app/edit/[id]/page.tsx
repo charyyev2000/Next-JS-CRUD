@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useEffect, useState } from "react";
 
 const EditPage = ({ params }: { params: { id: string } }) => {
-  const [formData, setFormData] = useState({ term: "", note: "" });
+  const [formData, setFormData] = useState({ title: "", note: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,7 +19,7 @@ const EditPage = ({ params }: { params: { id: string } }) => {
         }
         const data = await response.json();
         setFormData({
-          term: data.note.term,
+          title: data.note.title,
           note: data.note.note,
         });
       } catch (error) {
@@ -41,7 +41,7 @@ const EditPage = ({ params }: { params: { id: string } }) => {
 
   const updateSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.term || !formData.note) {
+    if (!formData.title || !formData.note) {
       setError("Please fill all the fields");
       return;
     }
@@ -76,8 +76,8 @@ const EditPage = ({ params }: { params: { id: string } }) => {
       <form onSubmit={updateSubmit} action="" className="flex gap-3 flex-col">
         <input
           type="text"
-          name="term"
-          value={formData.term}
+          name="title"
+          value={formData.title}
           onChange={handleInputChange}
           placeholder="Subject"
           className="py-1 px-4 border rounded-md"

@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface NoteProps {
   $id: string;
-  term: string;
+  title: string;
   note: string;
 }
 
@@ -58,7 +57,7 @@ export default function Home() {
                   key={note.$id}
                   className="p-4 my-2 rounded-md border-b leading-8"
                 >
-                  <div className="font-bold ">{note.term}</div>
+                  <div className="font-bold ">{note.title}</div>
                   <div>{note.note}</div>
                   <div className="flex gap-4 mt-4 justify-end ">
                     <Link

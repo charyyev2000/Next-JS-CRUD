@@ -5,11 +5,11 @@ import { NextResponse } from "next/server";
 const database = new Databases(client);
 
 // Note Creating
-async function createNote(data: { term: string; note: string }) {
+async function createNote(data: { title: string; note: string }) {
   try {
     const response = await database.createDocument(
-      process.env.APPRWRITE_DB as string,
-      "notes",
+      process.env.NEXT_PUBLIC_DATABASE_ID as string,
+      process.env.NEXT_PUBLIC_COLLECTION_ID as string,
       ID.unique(),
       data
     );
@@ -26,8 +26,9 @@ async function createNote(data: { term: string; note: string }) {
 async function fetchNotes() {
   try {
     const response = await database.listDocuments(
-      process.env.APPRWRITE_DB as string,
-      "notes",
+      process.env.NEXT_PUBLIC_DATABASE_ID as string,
+      process.env.NEXT_PUBLIC_COLLECTION_ID as string,
+
       [Query.orderDesc("$createdAt")]
     );
 
@@ -41,8 +42,8 @@ async function fetchNotes() {
 // post request
 export async function POST(req: Request) {
   try {
-    const { term, note } = await req.json();
-    const data = { term, note };
+    const { title, note } = await req.json();
+    const data = { title, note };
     const response = await createNote(data);
     return NextResponse.json({ message: "Notes created" });
   } catch (error) {

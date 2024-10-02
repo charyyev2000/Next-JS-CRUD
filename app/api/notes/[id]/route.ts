@@ -7,8 +7,8 @@ const database = new Databases(client);
 async function fetchNote(id: string) {
   try {
     const note = await database.getDocument(
-      process.env.APPRWRITE_DB as string,
-      "notes",
+      process.env.NEXT_PUBLIC_DATABASE_ID as string,
+      process.env.NEXT_PUBLIC_COLLECTION_ID as string,
       id
     );
 
@@ -23,8 +23,8 @@ async function fetchNote(id: string) {
 async function deleteNote(id: string) {
   try {
     const response = await database.deleteDocument(
-      process.env.APPRWRITE_DB as string,
-      "notes",
+      process.env.NEXT_PUBLIC_DATABASE_ID as string,
+      process.env.NEXT_PUBLIC_COLLECTION_ID as string,
       id
     );
     return response;
@@ -35,11 +35,11 @@ async function deleteNote(id: string) {
 }
 
 // Update specific Note
-async function updateNote(id: string, data: { term: string; note: string }) {
+async function updateNote(id: string, data: { title: string; note: string }) {
   try {
     const response = await database.updateDocument(
-      process.env.APPRWRITE_DB as string,
-      "notes",
+      process.env.NEXT_PUBLIC_DATABASE_ID as string,
+      process.env.NEXT_PUBLIC_COLLECTION_ID as string,
       id,
       data
     );

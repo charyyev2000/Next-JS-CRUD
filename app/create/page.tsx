@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
 
 const CreatePage = () => {
-  const [formData, setFormDate] = useState({ term: "", note: "" });
+  const [formData, setFormDate] = useState({ title: "", note: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,7 +21,7 @@ const CreatePage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.term || !formData.note) {
+    if (!formData.title || !formData.note) {
       setError("Please fill all the fields");
       return;
     }
@@ -58,10 +58,10 @@ const CreatePage = () => {
       <form onSubmit={handleSubmit} action="" className="flex gap-3 flex-col">
         <input
           type="text"
-          name="term"
+          name="title"
           placeholder="Subject"
           className="py-1 px-4 border rounded-md"
-          value={formData.term}
+          value={formData.title}
           onChange={inputHandler}
         />
 
